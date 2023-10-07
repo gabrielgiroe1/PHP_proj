@@ -9,7 +9,7 @@ if (isset($_POST['delete']) && isset($_POST['user_id'])) {
   header('Location: index.php');
   return;
 }
-$stmt = $pdo->prepare("SELECT * FROM users where id = :xyz");
+$stmt = $pdo->prepare("SELECT name, id FROM users where id = :xyz");
 $stmt->execute(array(':xyz' => $_GET['user_id']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 if ($row === false) {

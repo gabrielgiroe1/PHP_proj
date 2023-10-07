@@ -5,22 +5,24 @@ if (isset($_POST['delete']) && isset($_POST['user_id'])) {
   $sql = "DELETE FROM users WHERE id = :zip";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(':zip' => $_POST['user_id']));
-  $_SESSION['success']= "Record deleted";
+  $_SESSION['success'] = "Record deleted";
   header('Location: index.php');
   return;
 }
-$stmt = $pdo->prepare("SELECT name, id FROM users where id = :xyz");
-$stmt->execute(array(':xyz' => $_POST['user_id']));
+$stmt = $pdo->prepare("SELECT * FROM users where id = :xyz");
+$stmt->execute(array(':xyz' => $_GET['user_id']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-if($row===false){
+if ($row === false) {
   $_SESSION['error'] = "Bad ID number";
   header('Location: index.php');
   return;
 }
 ?>
-<p>Confirm deleting<?= htmlentities($row['name'])?></p>
+<p>Confirm deleting
+  <?= htmlentities($row['name']) ?>
+</p>
 <form method="post">
-    <input type="hidden" name="user_id" value="<?=$row['user_id']?>">
- <input type="submit" value="Delete" name="delete"/>
- <a href="index.php">Cancel</a>
+  <input type="hidden" name="user_id" value="<?= $row['id'] ?>">
+  <input type="submit" value="Delete" name="delete" />
+  <a href="index.php">Cancel</a>
 </form>

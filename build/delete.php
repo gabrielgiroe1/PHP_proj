@@ -1,5 +1,5 @@
 <?php
-require_once 'pdo.php';
+require_once(__DIR__ . '/../db/pdo.php');
 session_start();
 if (isset($_POST['delete']) && isset($_POST['user_id'])) {
   $sql = "DELETE FROM users WHERE id = :zip";

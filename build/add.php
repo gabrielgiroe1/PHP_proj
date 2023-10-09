@@ -1,5 +1,5 @@
 <?php
-require_once 'pdo.php';
+require_once(__DIR__ . '/../db/pdo.php');
 session_start();
 if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])) {
   if (strlen($_POST['name']) < 1 || strlen($_POST['email']) < 1 || strlen($_POST['password']) < 1) {
